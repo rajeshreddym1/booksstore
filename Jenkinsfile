@@ -22,12 +22,10 @@ pipeline {
     stage("SonarQube Analysis") {
       steps {
         echo "Running SonarQube analysis"
-        // Execute SonarQube analysis with Maven
-        sh 'mvn clean verify sonar:sonar \
-          -Dsonar.projectKey=github-project \
-          -Dsonar.projectName=\'github-project\' \
-          -Dsonar.host.url=http://192.168.33.10:9001 \
-          -Dsonar.login=sqp_f9c83e0f61e6e72fa7cb77d6faf68476d3cffc30'
+        withSonarQubeEnv('SonarQubeServer') {
+          // Configure the SonarQube Scanner
+          sh 'mvn sonar:sonar'
+        }
       }
     }
 
