@@ -5,7 +5,7 @@ pipeline {
     stage('Checkout') {
       steps {
         // Checkout code from Git repository
-        git branch: 'bookstore', url: 'https://github.com/rajeshreddym1/bookstore.git'
+        git main: 'bookstore', url: 'https://github.com/rajeshreddym1/bookstore.git'
       }
     }
     
