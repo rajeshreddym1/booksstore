@@ -1,11 +1,26 @@
-pipeline {  
-    agent any  
-        stages {  
-       	    stage("git_checkout") {  
-           	    steps {  
-              	    echo "cloning repository" 
-              	    echo "repo cloned successfully"  
-              	    }  
-         	    } 
-        }
+pipeline {
+  agent any
+  
+  stages {
+    stage('Checkout') {
+      steps {
+        // Checkout code from Git repository
+        git branch: 'bookstore', url: 'https://github.com/rajeshreddym1/bookstore.git'
+      }
+    }
+    
+    stage('Maven Test') {
+      steps {
+        // Run Maven tests
+        sh 'mvn test'
+      }
+    }
+    
+    stage('Maven Build') {
+      steps {
+        // Run Maven build
+        sh 'mvn package'
+      }
+    }
+  }
 }
